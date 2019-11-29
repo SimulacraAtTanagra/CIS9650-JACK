@@ -19,7 +19,8 @@ def index():
     import pandas as pd
     
     ## read the file
-    df0 = pd.read_csv("passport-index-matrix.csv")
+    url = 'https://github.com/JackJoeng/CIS9650-JACK/blob/master/passport-index-matrix.csv'
+    df0 = pd.read_csv(url,sep=",")
     
     ## set index for the matrix
     df1 = df0.set_index("Passport", drop = False)
@@ -88,4 +89,5 @@ def index():
                                          
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()
