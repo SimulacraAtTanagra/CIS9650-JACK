@@ -19,7 +19,7 @@ def index():
     import pandas as pd
     
     ## read the file
-    url = 'https://github.com/JackJoeng/CIS9650-JACK/blob/master/passport-index-matrix.csv'
+    url = 'https://raw.githubusercontent.com/jackjoeng/CIS9650-JACK/master/passport-index-matrix.csv'
     df0 = pd.read_csv(url,sep=",")
     
     ## set index for the matrix
