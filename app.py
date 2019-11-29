@@ -78,19 +78,28 @@ def index():
     df_country0 = df.loc[country, : ]
     df_country1 = df_country0.to_frame()
     
+    '''
+    text_file = open("templates/visas.html", "w")
+    text_file.write(df_country1.to_html())
+    text_file.close()
+    '''
+    
     return render_template('index.html', variable1= country,
                                          variable2 = df[country].value_counts(),
                                          variable3 = df.at[country, "Freedom_Score"],
                                          variable4 = int(df.at[country, "Rank"]),
-                                         variable5a = df_rank_max["Passport"],
-                                         variable5b = int(df_rank_max["Rank"]),
-                                         variable6a = df_rank_min["Passport"],
-                                         variable6b = int(df_rank_min["Rank"]))
-    return render_template('visas.html', variable7 = df_country1.to_html())
-                                         
+                                         variable5a = df_rank_min["Passport"],
+                                         variable5b = int(df_rank_min["Rank"]),
+                                         variable6a = df_rank_max["Passport"],
+                                         variable6b = int(df_rank_max["Rank"]))
+    
+    
+    ## return render_template('visas.html', variable7 = df_country1.to_html())
+'''                                         
 @app.route('/visas.html')
 def visas():              
     return render_template('visas.html')                          
+'''
 
 if __name__ == '__main__':
     app.debug = True
