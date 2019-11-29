@@ -49,7 +49,7 @@ def index():
     ## Merge the Freedom_Score column to main df. 
     df = df_to_text.join(df_for_score['Freedom_Score'])
     
-    df['Rank'] = df['Freedom_Score'].rank(method='min')
+    df['Rank'] = df['Freedom_Score'].rank(ascending=0)
     
     country = request.form['country']
     
@@ -66,12 +66,12 @@ def index():
     df_rank_min = df.nsmallest(1, "Rank").iloc[0]
     
     print("-----------------------------------")
-    print("Country that has highest freedom score:")
-    print(df_rank_max["Passport"], "| Rank:", int(df_rank_max["Rank"]))
-    print("-----------------------------------")
     print("Country that has lowest freedom score:")
-    print(df_rank_min["Passport"], "| Rank:", int(df_rank_min["Rank"]))
+    print(df_rank_max["Passport"], "| Rank:", int(df_rank_max["Rank"]))
     
+    print("-----------------------------------")
+    print("Country that has highest freedom score:")
+    print(df_rank_min["Passport"], "| Rank:", int(df_rank_min["Rank"]))
     
     ## Print the visa requirements for the country to html
     print("See the html...")
@@ -86,7 +86,11 @@ def index():
                                          variable5b = int(df_rank_max["Rank"]),
                                          variable6a = df_rank_min["Passport"],
                                          variable6b = int(df_rank_min["Rank"]))
+    return render_template('visas.html', variable7 = df_country1.to_html())
                                          
+@app.route('/visas.html')
+def visas():              
+    return render_template('visas.html')                          
 
 if __name__ == '__main__':
     app.debug = True
