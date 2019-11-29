@@ -8,7 +8,7 @@ Created on Fri Nov 29 00:20:41 2019
 
 from flask import Flask, request, render_template
 
-app = Flask('testapp')
+app = Flask(__name__)
 
 @app.route('/')
 def home():
